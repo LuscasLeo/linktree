@@ -9,7 +9,7 @@ fi
 
 # Obter versão do package.json
 VERSION=$(grep -m1 '"version":' package.json | cut -d'"' -f4)
-IMAGE_NAME="linktreeclone/linktree"
+IMAGE_NAME="luscasleo/linktree"
 
 echo "Construindo imagem Docker versão $VERSION..."
 docker build -t $IMAGE_NAME:$VERSION -t $IMAGE_NAME:latest .

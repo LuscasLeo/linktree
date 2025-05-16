@@ -1,6 +1,6 @@
 # Linktree Clone
 
-![Docker Pulls](https://img.shields.io/docker/pulls/linktreeclone/linktree) ![Docker Image Size](https://img.shields.io/docker/image-size/linktreeclone/linktree)
+![Docker Pulls](https://img.shields.io/docker/pulls/luscasleo/linktree) ![Docker Image Size](https://img.shields.io/docker/image-size/luscasleo/linktree)
 
 Uma aplicação web que permite criar e gerenciar links em uma única página, inspirada no [Linktree](https://linktr.ee/).
 
@@ -15,7 +15,7 @@ version: '3.8'
 
 services:
   app:
-    image: linktreeclone/linktree:latest
+    image: luscasleo/linktree:latest
     ports:
       - "3000:3000"
     volumes:
@@ -71,7 +71,7 @@ docker run -d \
   -e SESSION_SECRET=my_secure_secret \
   -v linktree_data:/app/data \
   -v ./images:/app/dist/public/images \
-  linktreeclone/linktree:latest
+  luscasleo/linktree:latest
 ```
 
 ## 🔧 Personalização

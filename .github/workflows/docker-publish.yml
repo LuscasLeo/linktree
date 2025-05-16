@@ -38,7 +38,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: linktreeclone/linktree
+          images: luscasleo/linktree
           tags: |
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
@@ -56,14 +56,14 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=registry,ref=linktreeclone/linktree:buildcache
-          cache-to: type=registry,ref=linktreeclone/linktree:buildcache,mode=max
+          cache-from: type=registry,ref=luscasleo/linktree:buildcache
+          cache-to: type=registry,ref=luscasleo/linktree:buildcache,mode=max
       
       - name: Update Docker Hub Description
         uses: peter-evans/dockerhub-description@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: linktreeclone/linktree
+          repository: luscasleo/linktree
           short-description: "LinkTree Clone - Gerenciador de links pessoais em uma única página"
           readme-filepath: ./README.docker.md
