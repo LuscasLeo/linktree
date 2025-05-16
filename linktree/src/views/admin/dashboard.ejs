@@ -1,0 +1,65 @@
+<%- include('../partials/admin-header') %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Gerenciar Links</h2>
+  <a href="/admin/links/new" class="btn btn-success">
+    <i class="fas fa-plus"></i> Novo Link
+  </a>
+</div>
+
+<% if (req.query && req.query.success) { %>
+  <div class="alert alert-success" role="alert">
+    <%= req.query.success %>
+  </div>
+<% } %>
+
+<% if (req.query && req.query.error) { %>
+  <div class="alert alert-danger" role="alert">
+    <%= req.query.error %>
+  </div>
+<% } %>
+
+<div class="card shadow-sm">
+  <div class="card-body p-0">
+    <% if (links && links.length > 0) { %>
+      <ul class="list-group list-group-flush link-list" id="sortableLinks">
+        <% links.forEach((link, index) => { %>
+          <li class="list-group-item" data-id="<%= link.id %>">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="link-info">
+                <span class="handle me-2"><i class="fas fa-grip-vertical text-muted"></i></span>
+                <span class="<%= link.active ? '' : 'text-muted text-decoration-line-through' %>">
+                  <strong><%= link.title || 'Sem título' %></strong>
+                  <small class="text-muted d-block"><%= link.url %></small>
+                </span>
+              </div>
+              
+              <div class="link-actions">
+                <a href="/admin/links/<%= link.id %>/edit" class="btn btn-sm btn-outline-primary me-1" title="Editar">
+                  <i class="fas fa-edit"></i>
+                </a>
+                <form action="/admin/links/<%= link.id %>?_method=DELETE" method="POST" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir este link?')">
+                  <button type="submit" class="btn btn-sm btn-outline-danger" title="Excluir">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <div class="text-center p-4 text-muted">
+        <p>Nenhum link cadastrado. <a href="/admin/links/new">Crie um novo link</a>.</p>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<div class="mt-4">
+  <a href="/" target="_blank" class="btn btn-outline-primary">
+    <i class="fas fa-external-link-alt"></i> Visualizar Página Pública
+  </a>
+</div>
+
+<%- include('../partials/admin-footer') %>

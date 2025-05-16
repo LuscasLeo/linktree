@@ -1,0 +1,69 @@
+<%- include('../partials/header', { title: title || 'LinkTree' ,
+    bodyClass: 'home-page d-flex flex-column min-vh-100 justify-content-center align-items-center py-4' }) %>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="content-wrapper">
+                    <div class="text-center mb-4">
+                        <div class="profile-image-container mb-3">
+                            <img src="/images/placeholder.svg" alt="Profile Image" class="profile-image">
+                        </div>
+                        <h1 class="profile-name">Meu LinkTree</h1>
+                        <p class="profile-username">@meuperfil</p>
+
+                        <div class="social-icons mb-4">
+                            <a href="#" class="me-2 text-decoration-none" target="_blank"><i
+                                    class="fab fa-instagram fa-lg"></i></a>
+                            <a href="#" class="me-2 text-decoration-none" target="_blank"><i
+                                    class="fab fa-twitter fa-lg"></i></a>
+                            <a href="#" class="me-2 text-decoration-none" target="_blank"><i
+                                    class="fab fa-youtube fa-lg"></i></a>
+                            <a href="#" class="me-2 text-decoration-none" target="_blank"><i
+                                    class="fab fa-github fa-lg"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="links-container">
+                        <% if (links && links.length> 0) { %>
+                            <% links.forEach((link, index)=> { %>
+                                <div class="animated-link">
+                                    <a href="<%= link.url %>" target="_blank" class="btn btn-link d-block w-100">
+                                        <% if (link.title) { %>
+                                            <span>
+                                                <%= link.title %>
+                                            </span>
+                                            <% } else { %>
+                                                <span>
+                                                    <%= link.url %>
+                                                </span>
+                                                <% } %>
+                                    </a>
+                                </div>
+                                <% }) %>
+                                    <% } else { %>
+                                        <div class="text-center text-muted py-4 animated-link">
+                                            <p>Nenhum link disponível no momento.</p>
+                                        </div>
+                                        <% } %>
+                    </div>
+
+                    <div class="text-center footer-credit">
+                        <span>Made with <i class="fas fa-heart text-danger"></i> using <a href="#"
+                                target="_blank">LinkTree Clone</a></span>
+                        <p class="mt-2">&copy; <%= new Date().getFullYear() %> Todos os direitos reservados</p>
+                    </div>
+                </div>
+
+                <!-- Botão flutuante para voltar ao topo (aparecerá em telas menores) -->
+                <div class="position-fixed bottom-0 end-0 p-3 d-md-none">
+                    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+                        class="btn btn-primary rounded-circle shadow">
+                        <i class="fas fa-arrow-up"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../partials/footer') %>

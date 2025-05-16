@@ -1,0 +1,12 @@
+<%- include('../partials/admin-header') %>
+
+<div class="alert alert-danger">
+  <h4 class="alert-heading">Erro!</h4>
+  <p><%= error || 'Ocorreu um erro inesperado.' %></p>
+  <hr>
+  <p class="mb-0">
+    <a href="/admin" class="btn btn-outline-danger">Voltar ao Dashboard</a>
+  </p>
+</div>
+
+<%- include('../partials/admin-footer') %>

@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: linktree-clone
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DB_DIRECTORY=/app/data
+      - SESSION_SECRET=${SESSION_SECRET:-prod_secret_change_me_in_production}
+      - SESSION_EXPIRY=${SESSION_EXPIRY:-86400000}
+    volumes:
+      - linktree-data:/app/data
+      - ./src/public/images:/app/dist/public/images
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+volumes:
+  linktree-data:
+    driver: local
