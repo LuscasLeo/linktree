@@ -6,7 +6,7 @@ yarn-error.log
 .git
 .gitignore
 .github
-*.md
+
 .DS_Store
 .env
 .env.*
