@@ -5,6 +5,10 @@ WORKDIR /app
 
 # Instalar dependências
 COPY package*.json ./
+COPY setup.sh ./
+RUN chmod +x setup.sh
+RUN pwd
+
 RUN npm ci
 
 # Copiar arquivos de configuração
@@ -39,6 +43,8 @@ COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/src/views ./dist/views
 COPY --from=builder /app/src/public ./dist/public
 COPY README.docker.md ./README.md
+COPY --from=builder /app/setup.sh ./
+RUN chmod +x setup.sh
 
 # Instalar apenas dependências de produção
 RUN npm ci --only=production

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Script de inicialização para configurar variáveis de ambiente
 
 # Verificar se o arquivo .env existe, caso contrário criar a partir do exemplo

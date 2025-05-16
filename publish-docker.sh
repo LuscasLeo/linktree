@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # Script para publicar a imagem Docker no DockerHub
 
 # Verificar se o usuário está logado no DockerHub

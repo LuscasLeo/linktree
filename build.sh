@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Script para construir a aplicação e copiar arquivos estáticos
 
