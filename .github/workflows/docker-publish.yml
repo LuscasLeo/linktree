@@ -59,11 +59,3 @@ jobs:
           cache-from: type=registry,ref=luscasleo/linktree:buildcache
           cache-to: type=registry,ref=luscasleo/linktree:buildcache,mode=max
       
-      - name: Update Docker Hub Description
-        uses: peter-evans/dockerhub-description@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: luscasleo/linktree
-          short-description: "LinkTree Clone - Gerenciador de links pessoais em uma única página"
-          readme-filepath: ./README.docker.md
