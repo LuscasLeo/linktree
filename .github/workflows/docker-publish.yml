@@ -6,30 +6,30 @@ on:
       - main
       - master
     tags:
-      - 'v*'
-  workflow_dispatch:  # Permite execução manual do workflow
+      - "v*"
+  workflow_dispatch: # Permite execução manual do workflow
 
 jobs:
   build-and-push:
     name: Build and Push Docker image
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-      
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      
+
       - name: Login to DockerHub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      
+
       - name: Extract package version
         id: package_version
         run: echo "version=$(grep -m1 '"version":' package.json | cut -d'"' -f4)" >> $GITHUB_OUTPUT
@@ -47,7 +47,7 @@ jobs:
             type=sha,format=short
             type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') || github.ref == format('refs/heads/{0}', 'master') }}
             type=raw,value=${{ steps.package_version.outputs.version }},enable=true
-      
+
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
@@ -58,4 +58,14 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=registry,ref=luscasleo/linktree:buildcache
           cache-to: type=registry,ref=luscasleo/linktree:buildcache,mode=max
-      
+
+      - uses: actions/checkout@v4
+
+      - name: Docker Hub Description
+        uses: peter-evans/dockerhub-description@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: luscasleo/linktree
+          short-description: "LinkTree Clone - Gerenciador de links pessoais em uma única página"
+          readme-filepath: ./README.docker.md
