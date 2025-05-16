@@ -1,0 +1,5 @@
+name: pytest
+tool: pytest
+target: test_*.py
+parallel: false
+additionalRunOpts: --tb=short

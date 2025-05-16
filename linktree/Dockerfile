@@ -38,6 +38,7 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/src/views ./dist/views
 COPY --from=builder /app/src/public ./dist/public
+COPY README.docker.md ./README.md
 
 # Instalar apenas dependências de produção
 RUN npm ci --only=production
@@ -53,6 +54,15 @@ VOLUME ["/app/data"]
 
 # Expor porta
 EXPOSE 3000
+
+# Adicionar metadados OCI
+LABEL org.opencontainers.image.title="Linktree Clone"
+LABEL org.opencontainers.image.description="Uma aplicação web que imita a funcionalidade do Linktree, permitindo criar e gerenciar links em uma única página."
+LABEL org.opencontainers.image.authors="Linktree Clone Developer"
+LABEL org.opencontainers.image.url="https://github.com/yourusername/linktree"
+LABEL org.opencontainers.image.documentation="https://github.com/yourusername/linktree"
+LABEL org.opencontainers.image.source="https://github.com/yourusername/linktree"
+LABEL org.opencontainers.image.licenses="MIT"
 
 # Comando para iniciar a aplicação
 CMD ["node", "dist/server.js"]

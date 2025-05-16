@@ -120,6 +120,7 @@ Para personalizar a aparência, edite os arquivos:
 O projeto inclui:
 - `Dockerfile` para construir a imagem da aplicação
 - `docker-compose.yml` para facilitar a execução com volume persistente para o banco de dados
+- `README.docker.md` específico para exibição no DockerHub
 
 ### Comandos Docker úteis
 
@@ -138,4 +139,25 @@ docker-compose logs -f
 
 # Parar os containers
 docker-compose down
+
+# Publicar no DockerHub manualmente (requer login)
+npm run docker:publish
+
+# Ou utilize o GitHub Actions (veja o diretório .github/workflows)
 ```
+
+### CI/CD com GitHub Actions
+
+Este projeto inclui workflows do GitHub Actions para:
+
+1. **Testes e Linting** (`test.yml`):
+   - Executa verificações de tipo TypeScript
+   - Realiza o build do projeto
+   - Roda em todos os pushes e pull requests
+
+2. **Build e Publicação Docker** (`docker-publish.yml`):
+   - Constrói a imagem Docker
+   - Publica automaticamente no DockerHub
+   - Executa em pushes para main/master e em novas tags
+
+Para configurar, veja o arquivo `.github/GITHUB_ACTIONS_SETUP.md`.

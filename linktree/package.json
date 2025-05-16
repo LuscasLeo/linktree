@@ -12,6 +12,7 @@
     "rebuild": "npm run clean && npm run build",
     "docker:build": "docker build -t linktree-clone .",
     "docker:run": "docker run -p 3000:3000 linktree-clone",
+    "docker:publish": "./publish-docker.sh",
     "prestart": "[ -d \"dist\" ] || npm run build",
     "prepare": "npm run setup"
   },
@@ -20,11 +21,25 @@
     "links",
     "express",
     "typescript",
-    "sqlite"
+    "sqlite",
+    "docker",
+    "portfolio",
+    "social-media"
   ],
   "author": "Linktree Clone Developer",
   "license": "MIT",
   "description": "Uma aplicação web que imita a funcionalidade do Linktree, permitindo criar e gerenciar links em uma única página.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/linktree"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/linktree/issues"
+  },
+  "homepage": "https://github.com/yourusername/linktree",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
